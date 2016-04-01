@@ -25,7 +25,8 @@ build/.unpacked: $(QT5_DL)
 build/armv7/.built: build/.unpacked
 	-rm -rf build/armv7
 	mkdir -p build/armv7
-	@echo "Using armv6 mkspec, since for now the armv7 mkspec doesn't exist"
+	@echo "Copying in webos mkspec ... "
+	cp -r webos-armv7 build/src/qtbase/mkspecs
 	+cd build/armv7 && \
 		$(CCENV) \
 		`readlink -f ../src`/configure \
@@ -37,6 +38,8 @@ build/armv7/.built: build/.unpacked
 		-no-xcb \
 		-no-gtkstyle \
 		-no-dbus \
+		-opengl es2 \
+		-xplatform webos-armv7 \
 		-confirm-license 
 	$(CCENV) $(MAKE) -C build/armv7 
 	$(CCENV) $(MAKE) -C build/armv7 install

@@ -12,6 +12,13 @@ and add:
 You may need to add the following packages to your development environment:
 cmake flex bison gperf pkg-config libglib2.0-dev
 
+To attempt to build pieces other than the default (LunaSysMgr / LunaCE) you may try:
+make CONFIG=woce isis
+or
+make CONFIG=woce qt5
+
+... but these targets probably need some additional work before they might function.
+
 Instructions:  http://webos-ports.org/wiki/WOCE_Build_Instructions
 
 Project Homepage: http://webos-ports.org

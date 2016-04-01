@@ -28,8 +28,8 @@ QT4_PATCH_DLTYPE := GZ
 
 # Ignore this for now...
 ISIS_NAME := Isis
-ISIS_VERSION := master 
-ISIS_URL := https://github.com/openwebos-ports/IsisCE.git 
+ISIS_VERSION := master
+ISIS_URL := https://github.com/woce/IsisCE.git 
 ISIS_DLTYPE := GIT
 
 QT5_NAME := qt5

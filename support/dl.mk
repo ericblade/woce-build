@@ -53,18 +53,19 @@ $$($1_DL):
 	rm -f $$@
 	mkdir -p $(DL_DIR)
 	if [ ! -e $(DL_DIR)/$1-git ] ; then \
-	  git clone -n $($1_URL) $(DL_DIR)/$1-git ; \
+	  git clone $($1_URL) $(DL_DIR)/$1-git ; \
 	elif [ -L $(DL_DIR)/$1-git ] ; then \
 	  true ; \
 	else \
 	  ( cd $(DL_DIR)/$1-git ; git fetch ) ; \
 	fi
-	cd $(DL_DIR)/$1-git ; git checkout $($1_VERSION)
-	tar -C $(DL_DIR)/$1-git -zcf $$@ .
-	( cd $(DL_DIR)/$1-git ; git log --pretty="format:%ct" -n 1 $($1_VERSION) | \
-	python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$$@",(time,time));'
+	( cd $(DL_DIR)/$1-git ; git checkout $($1_VERSION); git submodule init; git submodule update)
+	tar czvf $$($1_DL) $(DL_DIR)/$1-git/*
+	#( cd $(DL_DIR)/$1-git ; git log --pretty="format:%ct" -n 1 $($1_VERSION) | \
+	#python -c 'import os,sys; time = int(sys.stdin.read()); os.utime("$$@.tar.gz",(time,time)); ' )
 endef
 EXTRACTRULEGIT = tar -C $2 $3 -axvf $($1_DL)
+#EXTRACTRULEGIT = ln -s $($DL_DIR) $2
 
 # "DL" rule for directories on local machine.
 # Extract rule symlinks to the specified directory

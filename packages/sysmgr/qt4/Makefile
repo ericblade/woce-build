@@ -30,6 +30,7 @@ build/armv7/.built: build/.unpacked
 	+cd build/armv7 && \
 		$(CCENV) \
 		`readlink -f ../src`/configure \
+		-v \
 		--prefix=$(STAGING_DIR)/usr \
 		-opensource \
 		-no-cups \
@@ -61,7 +62,7 @@ build/armv7/.built: build/.unpacked
 		-xplatform qws/linux-armv6-g++ \
 		-fast \
 		-qconfig palm \
-		-DPALM_DEVICE
+		-DPALM_DEVICE 
 	$(CCENV) $(MAKE) -C build/armv7 \
 		 install_mkspecs \
 		 install_qmake \

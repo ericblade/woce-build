@@ -15,6 +15,7 @@ include $(LEVEL)/Makefile.common
 # For now, just list packages to be built here, in a working order.
 build:: linkdirs
 	$(MAKE) woce-toolchain woce-headers
+	$(MAKE) isis
 	$(MAKE) luna-sysmgr
 	@echo
 	@echo "Build Success!  New LunaSysMgr available at:"
@@ -48,12 +49,49 @@ downloads/.freetype:
 $(call DL,ISIS)
 
 ### Unpack the software and build it
+packages/isis/build/$(CONFIG)/.unpacked: $(ISIS_DL)
+	-rm -rf packages/isis/build/$(CONFIG)
+	mkdir -p packages/isis/build/$(CONFIG)/src
+	$(call EXTRACT,ISIS,packages/isis/build/$(CONFIG)/src,--strip=3)
+	touch $@
+
+isis-download: packages/isis/build/$(CONFIG)/.unpacked
+
+adapterbase:
+	$(MAKE) -C packages/isis -f Makefile.AdapterBase
+
+npapi:
+	$(MAKE) -C packages/isis -f Makefile.npapi
+
+cmakemodules:
+	$(MAKE) -C packages/isis -f Makefile.cmakemodules
+
+pbnjson: cmakemodules
+	$(MAKE) -C packages/isis -f Makefile.pbnjson
+
+pmcertificatemgr: cmakemodules
+	$(MAKE) -C packages/isis -f Makefile.pmcertmgr
+
+browseradapter: npapi pbnjson adapterbase browserserver
+	$(MAKE) -C packages/isis -f Makefile.BrowserAdapter
+
+browserserver: webkitsupplemental pmcertificatemgr
+	$(MAKE) -C packages/isis -f Makefile.BrowserServer
+
+webkit: webkit-depends
+	$(MAKE) -C packages/isis -f Makefile.WebKit
+
+webkitsupplemental: webkit
+	$(MAKE) -C packages/isis -f Makefile.WebKitSupplemental
 
 enyo1:
 	echo "Need to do something about enyo1"
 
 webview: enyo1
 	echo "Need to do something about webview"
+
+isis: isis-download browseradapter browserserver webview
+	echo "We'll need to run a palm-package"
 
 # Download and extract the toolchain
 woce-toolchain: toolchain/$(WOCE_TOOLCHAIN)/.unpacked

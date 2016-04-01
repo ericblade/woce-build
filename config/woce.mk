@@ -31,3 +31,9 @@ ISIS_NAME := Isis
 ISIS_VERSION := master 
 ISIS_URL := https://github.com/openwebos-ports/IsisCE.git 
 ISIS_DLTYPE := GIT
+
+QT5_NAME := qt5
+QT5_VERSION := 5.5.1
+QT5_URL := http://download.qt.io/archive/qt/5.5/5.5.1/single/qt-everywhere-opensource-src-5.5.1.tar.gz
+QT5_DLTYPE := TGZ
+

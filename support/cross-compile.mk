@@ -11,6 +11,7 @@ PROCCOUNT := 2
 # TODO: Move ISIS_ENV into here.
 
 CCENV := PATH=$(TCDIR)/bin:$(PATH)
+CCENV += PKG_CONFIG_PATH=$(STAGING_DIR)/usr/lib/pkgconfig/
 #CCENV += LIBRARY_PATH=/home/vagrant/woce-build/toolchain/arm-2009q1/arm-none-linux-gnueabi/libc/usr/lib:$LIBRARY_PATH
 #CCENV += LIBRARY_PATH=/usr/lib/i386-linux-gnu/:$LIBRARY_PATH
 CCENV += STAGING_LIBDIR=$(STAGING_DIR)/usr/lib

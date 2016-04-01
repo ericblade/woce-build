@@ -35,7 +35,7 @@ qt5:
 luna-sysmgr: qt4 qt5
 	$(MAKE) -C packages/sysmgr/luna-sysmgr
 
-webkit-depends: downloads/.zlib downloads/.freetype qt4 npapi
+webkit-depends: downloads/.zlib downloads/.freetype qt4
 
 # This is a mess... Need to clean it up...
 downloads/.zlib:

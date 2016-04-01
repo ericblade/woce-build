@@ -100,8 +100,8 @@ build/$(CONFIG)/.built-WebKit-${VERSION}: build/$(CONFIG)/.config-WebKit-${VERSI
 	--qmakearg="DEFINES+=XP_WEBOS" \
 	--qmakearg="DEFINES+=PALM_DEVICE" \
 	--qmakearg="DEFINES+=QT_WEBOS" \
-	--qmakearg="DEFINES+=WTF_USE_ZLIB=1" \
-        --qmakearg="DEFINES+=WTF_USE_OPENTYPE_SANITIZER=1" \
+        --qmakearg="DEFINES+=WTF_USE_ZLIB=0" \
+        --qmakearg="DEFINES+=WTF_USE_OPENTYPE_SANITIZER=0" \
 	--install-headers="$(STAGING_DIR)/usr/include/" \
 	--install-libs="$(STAGING_DIR)/usr/lib/"
 	make -C build/$(CONFIG)/src/WebKit/$(WEBKITOUTPUTDIR)/Release/ install
